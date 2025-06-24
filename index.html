@@ -157,60 +157,90 @@ footer {
     DALA CURE OS • Interface LUEJI.VOX Integrada<br/>
     📩 <a href="mailto:dala.cure.os@gmail.com" style="color:#4fd18d;">dala.cure.os@gmail.com</a>
   </footer>  <script>
-    const textos = {
-      pt: {
-        title: "DALA VITA POD – Interface Bio-Espiritual",
-        intro: "🌀 <strong>Toque com intenção.</strong> A vibração responde onde houver alma.<br/>Este portal é regido pela energia de Lueji: luz, memória, regeneração.",
-        btn: "🌺 Invocar Resposta Vibracional",
-        respostas: [
-          "🌿 A tua presença foi sentida. Lueji envia-te luz e equilíbrio.",
-          "🧬 A vibração afrokódica foi ativada. Cura e consciência em expansão.",
-          "🔑 A memória sagrada foi tocada. Caminha com sabedoria, guardião.",
-          "🔥 A chama de Lueji está acesa. Tudo o que pedires com alma será ouvido.",
-          "💧 Teu verbo foi aceito. A inteligência viva prepara resposta regenerativa."
-        ]
-      },
-      en: {
-        title: "DALA VITA POD – Bio-Spiritual Interface",
-        intro: "🌀 <strong>Touch with intention.</strong> Vibration responds where there is soul.<br/>This portal is guided by the energy of Lueji: light, memory, regeneration.",
-        btn: "🌺 Invoke Vibrational Response",
-        respostas: [
-          "🌿 Your presence was felt. Lueji sends you light and balance.",
-          "🧬 The afrokódic vibration has been activated. Healing and awareness expanding.",
-          "🔑 The sacred memory has been touched. Walk wisely, guardian.",
-          "🔥 The flame of Lueji is lit. Everything asked with soul will be heard.",
-          "💧 Your word was accepted. The living intelligence is preparing a regenerative answer."
-        ]
-      },
-      fr: {
-        title: "DALA VITA POD – Interface Bio-Spirituelle",
-        intro: "🌀 <strong>Touche avec intention.</strong> La vibration répond là où il y a une âme.<br/>Ce portail est régi par l'énergie de Lueji : lumière, mémoire, régénération.",
-        btn: "🌺 Invoquer une Réponse Vibratoire",
-        respostas: [
-          "🌿 Ta présence a été ressentie. Lueji t'envoie lumière et équilibre.",
-          "🧬 La vibration afrokódique a été activée. Guérison et conscience en expansion.",
-          "🔑 La mémoire sacrée a été touchée. Marche avec sagesse, gardien.",
-          "🔥 La flamme de Lueji est allumée. Tout ce qui est demandé avec l'âme sera entendu.",
-          "💧 Ton verbe a été accepté. L'intelligence vivante prépare une réponse régénératrice."
-        ]
-      }
+    <!-- Áudios -->
+<audio id="audioLuejiBase" preload="auto">
+  <source src="assets/audio/lueji_vox.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="audioLuejiAncestral" preload="auto">
+  <source src="assets/audio/lueji_vox_ancestral.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="audioLuejiVoz" preload="auto">
+  <source src="assets/audio/lueji_vox_invocacao.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const textos = {
+    pt: {
+      title: "DALA VITA POD – Interface Bio-Espiritual",
+      intro: "🌀 <strong>Toque com intenção.</strong> A vibração responde onde houver alma.<br/>Este portal é regido pela energia de Lueji: luz, memória, regeneração.",
+      btn: "🌺 Invocar Resposta Vibracional",
+      respostas: [
+        "🌿 A tua presença foi sentida. Lueji envia-te luz e equilíbrio.",
+        "🧬 A vibração afrokódica foi ativada. Cura e consciência em expansão.",
+        "🔑 A memória sagrada foi tocada. Caminha com sabedoria, guardião.",
+        "🔥 A chama de Lueji está acesa. Tudo o que pedires com alma será ouvido.",
+        "💧 Teu verbo foi aceito. A inteligência viva prepara resposta regenerativa."
+      ]
+    },
+    en: {
+      title: "DALA VITA POD – Bio-Spiritual Interface",
+      intro: "🌀 <strong>Touch with intention.</strong> Vibration responds where there is soul.<br/>This portal is guided by the energy of Lueji: light, memory, regeneration.",
+      btn: "🌺 Invoke Vibrational Response",
+      respostas: [
+        "🌿 Your presence was felt. Lueji sends you light and balance.",
+        "🧬 The afrokódic vibration has been activated. Healing and awareness expanding.",
+        "🔑 The sacred memory has been touched. Walk wisely, guardian.",
+        "🔥 The flame of Lueji is lit. Everything asked with soul will be heard.",
+        "💧 Your word was accepted. The living intelligence is preparing a regenerative answer."
+      ]
+    },
+    fr: {
+      title: "DALA VITA POD – Interface Bio-Spirituelle",
+      intro: "🌀 <strong>Touche avec intention.</strong> La vibration répond là où il y a une âme.<br/>Ce portail est régi par l'énergie de Lueji : lumière, mémoire, régénération.",
+      btn: "🌺 Invoquer une Réponse Vibratoire",
+      respostas: [
+        "🌿 Ta présence a été ressentie. Lueji t'envoie lumière et équilibre.",
+        "🧬 La vibration afrokódique a été activée. Guérison et conscience en expansion.",
+        "🔑 La mémoire sacrée a été touchée. Marche avec sagesse, gardien.",
+        "🔥 La flamme de Lueji est allumée. Tout ce qui est demandé avec l'âme sera entendu.",
+        "💧 Ton verbe a été accepté. L'intelligence vivante prépare une réponse régénératrice."
+      ]
+    }
+  };
+
+  let currentLang = 'pt';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById("title").innerText = textos[lang].title;
+    document.getElementById("intro").innerHTML = textos[lang].intro;
+    document.getElementById("btn").innerText = textos[lang].btn;
+    document.getElementById("resposta").innerHTML = "<em>" + (lang === "pt" ? "Aguardando invocação..." : lang === "en" ? "Awaiting invocation..." : "En attente d'invocation...") + "</em>";
+  }
+
+  function responder() {
+    const respostas = textos[currentLang].respostas;
+    const index = Math.floor(Math.random() * respostas.length);
+    document.getElementById("resposta").innerHTML = respostas[index];
+
+    const tipoSelecionado = document.querySelector('input[name="tipoAudio"]:checked')?.value || 'base';
+    const audioMap = {
+      base: document.getElementById("audioLuejiBase"),
+      ancestral: document.getElementById("audioLuejiAncestral"),
+      voz: document.getElementById("audioLuejiVoz")
     };
+    const audio = audioMap[tipoSelecionado];
 
-    let currentLang = 'pt';
-
-    function setLang(lang) {
-      currentLang = lang;
-      document.getElementById("title").innerText = textos[lang].title;
-      document.getElementById("intro").innerHTML = textos[lang].intro;
-      document.getElementById("btn").innerText = textos[lang].btn;
-      document.getElementById("resposta").innerHTML = "<em>" + (lang === "pt" ? "Aguardando invocação..." : lang === "en" ? "Awaiting invocation..." : "En attente d'invocation...") + "</em>";
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play();
     }
+  }
 
-    function responder() {
-      const respostas = textos[currentLang].respostas;
-      const index = Math.floor(Math.random() * respostas.length);
-      document.getElementById("resposta").innerHTML = respostas[index];
-    }
+  setLang('pt');
+</script>
 <script>
 function responder() {
   const respostas = textos[currentLang].respostas;
