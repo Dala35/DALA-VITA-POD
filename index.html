@@ -213,14 +213,21 @@ footer {
         ancestral: document.getElementById("audioLuejiAncestral"),
         voz: document.getElementById("audioLuejiVoz")
       };
-      const audio = audioMap[tipoSelecionado];
+      const audioMap = {
+        base: document.getElementById("audioLuejiBase"),
+        ancestral: document.getElementById("audioLuejiAncestral"),
+        voz: document.getElementById("audioLuejiVoz")
+      };
 
-      if (audio) {
+      // Pausar todos antes de tocar o selecionado
+      Object.values(audioMap).forEach(audio => {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play();
-      }
-    }
+      });
 
-    setLang('pt');
-  </script></body>
+      // Tocar o selecionado
+      audioMap[tipoSelecionado].play();
+    }
+  </script>
+</body>
 </html>
