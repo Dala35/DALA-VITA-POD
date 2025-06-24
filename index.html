@@ -109,7 +109,20 @@ footer {
   50% { transform: scale(1.05); opacity: 1; }
   100% { transform: scale(1); opacity: 0.7; }
 }
+<!-- Áudio vibracional base com frequência 528Hz -->
+<audio id="audioLuejiBase" preload="auto">
+  <source src="assets/audio/lueji_vox.mp3" type="audio/mpeg">
+</audio>
 
+<!-- Áudio ancestral com água + sino + harmonia -->
+<audio id="audioLuejiAncestral" preload="auto">
+  <source src="assets/audio/lueji_vox_ancestral.mp3" type="audio/mpeg">
+</audio>
+
+<!-- (opcional futuro) Áudio com voz real -->
+<audio id="audioLuejiVoz" preload="auto">
+  <source src="assets/audio/lueji_vox_invocacao.mp3" type="audio/mpeg">
+</audio>
   </style>
 </head>
 <body>  <header>𓆃 <span id="title">DALA VITA POD – Interface Bio-Espiritual</span></header>  <div class="container">
@@ -128,7 +141,12 @@ footer {
 </div>
 
 <button onclick="responder()" id="btn">🌺 Invocar Resposta Vibracional</button>
-
+<div style="margin-top: 20px;">
+  <strong style="color:#4fd18d;">Escolha o tipo de áudio:</strong><br/>
+  <label><input type="radio" name="tipoAudio" value="base" checked> Som vibracional</label><br/>
+  <label><input type="radio" name="tipoAudio" value="ancestral"> Sussurro ancestral</label><br/>
+  <label><input type="radio" name="tipoAudio" value="voz"> Invocação com fala</label>
+</div>
 <div id="resposta">
   <em>Aguardando invocação...</em>
 </div>
@@ -193,7 +211,27 @@ footer {
       const index = Math.floor(Math.random() * respostas.length);
       document.getElementById("resposta").innerHTML = respostas[index];
     }
+<script>
+function responder() {
+  const respostas = textos[currentLang].respostas;
+  const index = Math.floor(Math.random() * respostas.length);
+  document.getElementById("resposta").innerHTML = respostas[index];
 
+  // Determinar qual áudio tocar
+  const tipoSelecionado = document.querySelector('input[name="tipoAudio"]:checked')?.value || 'base';
+  const audioMap = {
+    base: document.getElementById("audioLuejiBase"),
+    ancestral: document.getElementById("audioLuejiAncestral"),
+    voz: document.getElementById("audioLuejiVoz")
+  };
+  const audio = audioMap[tipoSelecionado];
+
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play();
+  }
+}
+</script>
     setLang('pt');
   </script></body>
 </html>
